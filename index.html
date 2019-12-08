@@ -28,6 +28,11 @@
             i: 'iqiyi.com', o: 'opera.com', p: undefined,
             a: 'acfun.tv', s: 'sohu.com', z: 'zhihu.com', m: 'macdonalds.com.cn',
         }
+        //取出localstorage中的zzz所对应的hash
+        var hashInlocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+        if (localStorage) {
+            hash = hashInlocalStorage
+        }
         //遍历keys,形成kbd标签
         index = 0
         while (index < keys['length']) { //0 1 2
@@ -41,11 +46,13 @@
                 kbdXXXXX.textContent = row[index2]
                 buttonX = document.createElement('button')
                 buttonX.textContent = '编辑'
+                buttonX.id = row[index2]
                 buttonX.onclick = function (nmsl) {
                     key = nmsl['target']['id']
                     x = prompt('给我一个网址')
-                    hash[key] = x //hash变更
+                    hash[key] = x  //hash变更
                     localStorage.setItem('zzz', JSON.stringify(hash))
+
                 }
                 kbdXXXXX.appendChild(buttonX)
                 divXXXXX.appendChild(kbdXXXXX)
@@ -58,8 +65,7 @@
         document.onkeypress = function (nmsl) {
             key = nmsl['key'] //q w e
             website = hash[key]
-            console.log(website)
-            //location.href ='http://'+ website //当前地址栏的地址
+            console.log(website)  //location.href ='http://'+ website 当前地址栏的地址
             window.open('http://' + website, 'blank')
 
         }
