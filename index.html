@@ -47,8 +47,8 @@
                 buttonX = document.createElement('button')
                 buttonX.textContent = '编辑'
                 buttonX.id = row[index2]
-                buttonX.onclick = function (nmsl) {
-                    key = nmsl['target']['id']
+                buttonX.onclick = function (sunxiaochuan) {
+                    key = nm['target']['id']
                     x = prompt('给我一个网址')
                     hash[key] = x  //hash变更
                     localStorage.setItem('zzz', JSON.stringify(hash))
