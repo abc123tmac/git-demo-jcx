@@ -36,7 +36,7 @@
 
         //取出localstorage中的zzz所对应的hash
         var hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
-        if (localStorage) {
+        if (hashInLocalStorage) {
             hash = hashInLocalStorage
         }
         console.log(hash)
@@ -51,29 +51,39 @@
             index2 = 0
             while (index2 < row['length']) { //0-9 0-8 0-6
                 kbd = document.createElement('kbd')
-                kbd.textContent = row[index2]
+                span = document.createElement('span')
+                span.textContent = row[index2]
+                span.className = 'text'
+                kbd.appendChild(span)
                 kbd.className = 'key'
                 button = document.createElement('button')
                 button.textContent = '编辑'
                 button.id = row[index2]
                 img = document.createElement('img')
-                img.src = 'http://' + hash[row[index2]] + '/favicon.ico'
-                button.onclick = function (nm) {
-                    key = nm['target']['id']
-                    x = prompt('给我一个网址')
-                    hash[key] = x  //hash变更
-                    localStorage.setItem('zzz', JSON.stringify(hash))
+                if (hash[row[index2]]) {
+                    img.src = 'http://' + hash[row[index2]] + '/favicon.ico'
 
+                } else {
+                    img.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png'
                 }
-                kbd.appendChild(img)
-                kbd.appendChild(button)
-                div.appendChild(kbd)
-                index2 = index2 + 1
-
             }
 
-            index = index + 1
+            button.onclick = function (nm) {
+                key = nm['target']['id']
+                x = prompt('给我一个网址')
+                hash[key] = x  //hash变更
+                localStorage.setItem('zzz', JSON.stringify(hash))
+
+            }
+            kbd.appendChild(img)
+            kbd.appendChild(button)
+            div.appendChild(kbd)
+            index2 = index2 + 1
+
         }
+
+        index = index + 1
+        
         document.onkeypress = function (nmsl) {
             key = nmsl['key'] //q w e
             website = hash[key]
