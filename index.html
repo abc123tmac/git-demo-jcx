@@ -62,32 +62,33 @@
                 img = document.createElement('img')
                 if (hash[row[index2]]) {
                     img.src = 'http://' + hash[row[index2]] + '/favicon.ico'
+                } else {
+                    img.src = '//i.loli.net/2020/01/04/aWydq8SonDmek2C.png'
                 }
+
+                button.onclick = function (nm) {
+                    key = nm['target']['id']
+                    x = prompt('给我一个网址')
+                    hash[key] = x  //hash变更
+                    localStorage.setItem('zzz', JSON.stringify(hash))
+
+                }
+                kbd.appendChild(img)
+                kbd.appendChild(button)
+                div.appendChild(kbd)
+                index2 = index2 + 1
+
             }
 
-            button.onclick = function (nm) {
-                key = nm['target']['id']
-                x = prompt('给我一个网址')
-                hash[key] = x  //hash变更
-                localStorage.setItem('zzz', JSON.stringify(hash))
+            index = index + 1
+
+            document.onkeypress = function (nmsl) {
+                key = nmsl['key'] //q w e
+                website = hash[key]
+                console.log(website)  //location.href ='http://'+ website 当前地址栏的地址
+                window.open('http://' + website, 'blank')
 
             }
-            kbd.appendChild(img)
-            kbd.appendChild(button)
-            div.appendChild(kbd)
-            index2 = index2 + 1
-
-        }
-
-        index = index + 1
-
-        document.onkeypress = function (nmsl) {
-            key = nmsl['key'] //q w e
-            website = hash[key]
-            console.log(website)  //location.href ='http://'+ website 当前地址栏的地址
-            window.open('http://' + website, 'blank')
-
-        }
 
     </script>
 </body>
