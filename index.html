@@ -65,6 +65,9 @@
                 } else {
                     img.src = '//i.loli.net/2020/01/04/aWydq8SonDmek2C.png'
                 }
+                img.onerror = function () {
+                    console.log('下载失败了')
+                }
 
                 button.onclick = function (nm) {
                     key = nm['target']['id']
